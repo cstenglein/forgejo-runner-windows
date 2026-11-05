@@ -43,6 +43,26 @@ func TestParseEnvFile(t *testing.T) {
 			mapContents: map[string]string{"abc": "123"},
 		},
 		{
+			name:        "UTF-8 BOM with Windows line endings",
+			rawContents: "\ufeffabc=123\r\ndef=456\r\n",
+			mapContents: map[string]string{"abc": "123", "def": "456"},
+		},
+		{
+			name:        "UTF-8 BOM before multiline value",
+			rawContents: "\ufeffabc<<EOF\r\nfirst\r\nsecond\r\nEOF\r\n",
+			mapContents: map[string]string{"abc": "first\nsecond"},
+		},
+		{
+			name:        "UTF-8 BOM only",
+			rawContents: "\ufeff",
+			mapContents: map[string]string{},
+		},
+		{
+			name:        "BOM within a value is preserved",
+			rawContents: "\ufeffabc=\ufeff123\n",
+			mapContents: map[string]string{"abc": "\ufeff123"},
+		},
+		{
 			name:        "65kB value",
 			rawContents: fmt.Sprintf("abc=%s\n", data65kb.String()),
 			mapContents: map[string]string{"abc": data65kb.String()},

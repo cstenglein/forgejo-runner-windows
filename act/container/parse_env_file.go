@@ -38,7 +38,13 @@ func ParseEnvFile(e Container, srcPath string, env *map[string]string) common.Ex
 		// https://codeberg.org/forgejo/forgejo/src/commit/b11ceeecaaf1b4d8e052a606d673bd68a5365b4c/routers/api/actions/runner/runner.go#L205-L208
 		maxKeySize := 255
 
-		s := bufio.NewScanner(reader)
+		// Windows PowerShell 5's Out-File -Encoding utf8 writes a BOM.
+		// It marks the file encoding and must not become part of the first key.
+		bufferedReader := bufio.NewReader(reader)
+		if prefix, _ := bufferedReader.Peek(3); string(prefix) == "\xef\xbb\xbf" {
+			_, _ = bufferedReader.Discard(3)
+		}
+		s := bufio.NewScanner(bufferedReader)
 		// Provide the scanner a moderate 1KB buffer. Scanner needs a maximum memory allocation to scan for newlines,
 		// which it can grow the buffer to -- you'd have to have a single-line output at the max key size and max value
 		// size to exceed this buffer length. +1 for the "=", and +1 for the newline.

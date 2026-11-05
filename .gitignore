@@ -12,5 +12,22 @@ __debug_bin
 # gorelease binary folder
 dist
 
+# Windows build output and local deployment data
+.build/
+artifacts/
+.local/
+/settings.json
+/runner-token*
+/data/
+/backups/
+/state/
+*.credential.xml
+*.pfx
+*.p12
+*-status.json
+*-result.json
+*-diagnostics.json
+*daemon-log.txt
+
 # Jetbrains IDE
 .idea
