@@ -1,0 +1,25 @@
+name: Native Windows host smoke test
+on:
+  workflow_dispatch:
+jobs:
+  smoke:
+    runs-on: windows-electron
+    defaults:
+      run:
+        shell: powershell
+    steps:
+      - name: Check Windows and export environment
+        id: windows
+        run: |
+          if ($env:OS -ne 'Windows_NT') { throw 'Windows required' }
+          git --version
+          if ($LASTEXITCODE -ne 0) { throw 'Git unavailable' }
+          'WINDOWS_RUNNER_SMOKE=ok' | Out-File $env:FORGEJO_ENV -Append -Encoding utf8
+          'result=ok' | Out-File $env:FORGEJO_OUTPUT -Append -Encoding utf8
+      - name: Check environment and step output
+        env:
+          PREVIOUS_RESULT: ${{ steps.windows.outputs.result }}
+        run: |
+          if ($env:WINDOWS_RUNNER_SMOKE -ne 'ok') { throw 'Environment propagation failed' }
+          if ($env:PREVIOUS_RESULT -ne 'ok') { throw 'Step output propagation failed' }
+          Write-Output 'Native Windows host workflow passed'
