@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [ValidatePattern('^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$')]
-    [string]$Version = '13.2.0',
+    [string]$Version = '13.2.1',
     [string]$GoExecutable = 'go.exe'
 )
 . "$PSScriptRoot\Common.ps1"

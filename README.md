@@ -1,7 +1,7 @@
 # Forgejo Runner for Windows
 
 Community Windows x64 builds and an editable source fork of Forgejo Runner,
-starting from upstream **v13.2.0**. This repository contains the full upstream
+based on upstream **v13.2.1**. This repository contains the full upstream
 source and history. The Windows build compiles this checkout, so fixes made
 here are included in the executable.
 
@@ -30,7 +30,7 @@ git clone https://github.com/cstenglein/forgejo-runner-windows.git
 cd forgejo-runner-windows
 
 # Edit the actual Go source in this checkout, then build and test it.
-./contrib/windows/Build.ps1 -Version 13.2.0-windows.1
+./contrib/windows/Build.ps1 -Version 13.2.1-windows.1
 ./contrib/windows/Test.ps1
 ```
 
@@ -48,16 +48,16 @@ as produced by Windows PowerShell 5's `Out-File -Encoding utf8`.
 
 - Pushes to `main`, pull requests and manual workflow runs build and test the
   current source and upload downloadable workflow artifacts.
-- Pushing a release tag such as `v13.2.0-windows.1` builds that exact commit and
+- Pushing a release tag such as `v13.2.1-windows.1` builds that exact commit and
   publishes the executable, matching source, manifest, license and checksums as
   a GitHub release.
 - Use a new `windows.N` suffix when publishing local fixes for the same upstream
   release. Do not move an existing release tag.
 
 ```powershell
-git tag v13.2.0-windows.1
+git tag v13.2.1-windows.1
 git push origin main
-git push origin v13.2.0-windows.1
+git push origin v13.2.1-windows.1
 ```
 
 No Forgejo instance address, runner token, personal GitHub token, signing key or
@@ -75,8 +75,8 @@ git fetch upstream --tags
 # Merge a reviewed upstream release into a branch, resolve changes, and rerun tests.
 ```
 
-The current upstream base is tag `v13.2.0`, commit
-`df6b843fb929bb04b933b09c6bf208774d42480b`. Keep the Windows build path when
+The current upstream base is tag `v13.2.1`, commit
+`c4a92ffa5e3a400ae7e9c40a2914e649eb338ad7`. Keep the Windows build path when
 merging later upstream changes. For Windows-specific issues and fixes, use this
 repository's issues and pull requests; report general upstream issues to Forgejo.
 

@@ -22,13 +22,13 @@ trap "rm -fr $TMPDIR" EXIT
 : ${INPUTS_LIFETIME:=7d}
 DEFAULT_LXC_HELPERS_VERSION=1.1.3 # renovate: datasource=forgejo-tags depName=forgejo/lxc-helpers
 : ${INPUTS_LXC_HELPERS_VERSION:=$DEFAULT_LXC_HELPERS_VERSION}
-DEFAULT_RUNNER_VERSION=13.1.0 # renovate: datasource=forgejo-releases depName=forgejo/runner
+DEFAULT_RUNNER_VERSION=13.2.0 # renovate: datasource=forgejo-releases depName=forgejo/runner
 : ${INPUTS_RUNNER_VERSION:=$DEFAULT_RUNNER_VERSION}
 
 : ${KILL_AFTER:=21600} # 6h == 21600
 NODEJS_VERSION=24 # renovate: datasource=node-version depName=forgejo-runner-service-node
 DEBIAN_RELEASE=trixie # renovate: datasource=docker depName=forgejo-runner-service-debian packageName=code.forgejo.org/oci/debian versioning=debian
-YQ_VERSION=v4.53.6 # renovate: datasource=github-releases depName=forgejo-runner-service-yq packageName=mikefarah/yq
+YQ_VERSION=v4.54.1 # renovate: datasource=github-releases depName=forgejo-runner-service-yq packageName=mikefarah/yq
 SELF=${BASH_SOURCE[0]}
 SELF_FILENAME=$(basename "$SELF")
 SELF_INSTALLED=/usr/local/bin/$SELF_FILENAME

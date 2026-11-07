@@ -7,7 +7,7 @@ Requirements: Windows x64, Git, Go matching `go.mod`, and Windows PowerShell or
 PowerShell 7. Docker is not needed for the Windows smoke test.
 
 ```powershell
-./contrib/windows/Build.ps1 -Version 13.2.0-windows.1
+./contrib/windows/Build.ps1 -Version 13.2.1-windows.1
 ./contrib/windows/Test.ps1
 ./contrib/windows/Package.ps1
 ```

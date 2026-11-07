@@ -37,7 +37,7 @@ jobs:
           $version = if ($env:REF_TYPE -eq 'tag') {
             $env:REF_NAME -replace '^v', ''
           } else {
-            '13.2.0-dev.' + $env:GITHUB_SHA.Substring(0, 8)
+            '13.2.1-dev.' + $env:GITHUB_SHA.Substring(0, 8)
           }
           if ($version -notmatch '^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$') { throw 'Invalid release version' }
           "BUILD_VERSION=$version" | Out-File $env:GITHUB_ENV -Append -Encoding utf8
